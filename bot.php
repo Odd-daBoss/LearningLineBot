@@ -5,10 +5,6 @@ $access_token = 'fLRrTmvRRN/JbtfxjbYstevAaoc6LcFj+jeL52oz4PGxxEdAVPtb+TYZBgqGVAJ
 $content = file_get_contents('php://input');
 // Parse JSON
 $events = json_decode($content, true);
-// Set initial reply to FALSE
-$reply = false;
-// Set initial leave group to FALSE
-$leaveGroup = false;
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
 	// Loop through each event
@@ -48,4 +44,4 @@ if (!is_null($events['events'])) {
 		}
 	}
 }
-echo "I am Working - I am Learning - I am OK!";
+echo "OK";
