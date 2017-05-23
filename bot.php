@@ -44,7 +44,16 @@ if (!is_null($events['events'])) {
 
 			// Check condition to leave Group
 			if ($event['message']['text'] == 'BoT Leave') {
-				// Make a POST Request to Leave Group
+				// Make a POST Request to Leave
+				// Check to leaveGroup or leaveRoom
+				switch ($event[source][type]) {
+					case "group":
+						$url = 'https://api.line.me/v2/bot/group/'.$event[source][groupId].'/leave';
+						break;
+					case "room":
+						$url = 'https://api.line.me/v2/bot/room/'.$event[source][roomId].'/leave';
+						break;
+				}
 				$url = 'https://api.line.me/v2/bot/group/'.$event[source][groupId].'/leave';
 				$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
 
