@@ -44,4 +44,5 @@ if (!is_null($events['events'])) {
 		}
 	}
 }
+// Redeploy this code!
 echo "OK";
