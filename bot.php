@@ -43,7 +43,7 @@ if (!is_null($events['events'])) {
 			echo $result . "\r\n";
 
 			// Check condition to leave Group
-			if ($event['message']['text'] == 'BoT Leave') {
+			if ($event['message']['text'] == 'BoT Leave' && $event[source][type] != 'user') {
 				// Make a POST Request to Leave
 				// Check to leaveGroup or leaveRoom
 				switch ($event[source][type]) {
@@ -53,20 +53,6 @@ if (!is_null($events['events'])) {
 					case "room":
 						$url = 'https://api.line.me/v2/bot/room/'.$event[source][roomId].'/leave';
 						break;
-					default:
-						// Build message to reply back
-						$messages = [
-							'type' => 'text',
-							'text' => 'ก็ไม่เกี่ยวนะ'
-						];
-
-						// Make a POST Request to Messaging API to reply to sender
-						$url = 'https://api.line.me/v2/bot/message/reply';
-						$data = [
-							'replyToken' => $replyToken,
-							'messages' => [$messages],
-						];
-						$post = json_encode($data);
 				}
 				$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
 
