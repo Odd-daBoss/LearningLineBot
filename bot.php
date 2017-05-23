@@ -12,7 +12,7 @@ if (!is_null($events['events'])) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
-			$text = $event['message']['text'].' OK';
+			$text = $event['message']['text'].' - แล้วไง?';
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
@@ -41,6 +41,24 @@ if (!is_null($events['events'])) {
 			curl_close($ch);
 
 			echo $result . "\r\n";
+
+			// Check condition to leave Group
+			if ($event['message']['text'] == 'BoT Leave') {
+				// Make a POST Request to Leave Group
+				$url = 'https://api.line.me/v2/bot/group/'.event[source][groupId].'leave';
+				$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+
+				$ch = curl_init($url);
+				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+				curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+				$result = curl_exec($ch);
+				curl_close($ch);
+
+				echo $result . "\r\n";
+			}
 		}
 	}
 }
