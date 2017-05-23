@@ -45,7 +45,7 @@ if (!is_null($events['events'])) {
 			// Check condition to leave Group
 			if ($event['message']['text'] == 'BoT Leave') {
 				// Make a POST Request to Leave Group
-				$url = 'https://api.line.me/v2/bot/group/'.$event[source][groupId].'leave';
+				$url = 'https://api.line.me/v2/bot/group/'.$event[source][groupId].'/leave';
 				$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
 
 				$ch = curl_init($url);
